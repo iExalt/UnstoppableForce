@@ -1,0 +1,11 @@
+---
+- name: Copy website folder into image
+  hosts: all
+  tasks:
+    - name: Add test folder
+      synchronize:
+        src: /home/clement/Documents/website/dev_test/
+        dest: /root
+        recursive: yes
+        rsync_opts:
+          - "--no-motd"

@@ -1,0 +1,13 @@
+---
+- hosts: all
+  become: yes
+  become_user: root
+  gather_facts: no
+  
+  tasks:
+   #- name: Print all Facts
+   #  debug:
+   #    var: hostvars
+   
+   - name: test
+     ping:
