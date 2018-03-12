@@ -2,7 +2,7 @@
 - name: Copy website folder into image
   hosts: all
   tasks:
-    - name: Add test folder
+    - name: Add website folder
       synchronize:
         src: /home/clement/Documents/website/dev_test/
         dest: /root

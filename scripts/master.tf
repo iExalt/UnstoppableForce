@@ -1,6 +1,6 @@
-resource "digitalocean_droplet" "test" {
+resource "digitalocean_droplet" "instance" {
     image = "32343861"
-    name = "test"
+    name = "instance"
     region = "tor1"
     size = "s-1vcpu-1gb"
     private_networking = true
@@ -20,7 +20,7 @@ resource "digitalocean_droplet" "test" {
     inline = [
       "export PATH=$PATH:/usr/bin",
       # set up docker
-      "apt-get update && apt-get --yes install apt-transport-https ca-certificates curl software-properties-common",
+      "apt-get --yes install apt-transport-https ca-certificates curl software-properties-common",
       "curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -",
       "add-apt-repository \"deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable\"",
       "apt-get update",
@@ -28,19 +28,8 @@ resource "digitalocean_droplet" "test" {
       "apt-get --yes install docker-ce=17.12.1~ce-0~ubuntu"
     ]
   }
-  provisioner "file" {
-    source = "/home/clement/Documents/terraform_test/v2/immutable.tar"
-    destination = "/root/immutable.tar"
-  }
-  provisioner "remote-exec" {
-    inline = [ 
-      "echo lol",
-      "docker import /root/immutable.tar website:latest",
-      "docker run -d -p 5000:5000 website:latest python3 /root/website.py"
-    ]
-  }
 }
 
 output "ip" {
-  value ="${digitalocean_droplet.test.ipv4_address}"
+  value ="${digitalocean_droplet.instance.ipv4_address}"
 }

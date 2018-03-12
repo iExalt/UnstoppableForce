@@ -1,0 +1,6 @@
+# Rename to $NAME.tfvars before use!
+
+do_token = "$TOKEN"
+pub_key = "$PATH_TO_PUBLIC_KEY"
+pvt_key = "$PATH_TO_PRIVATE_KEY"
+ssh_fingerprint = "$SSH_KEY_FINGERPRINT"
