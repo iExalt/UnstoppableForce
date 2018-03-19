@@ -7,7 +7,7 @@
   "builders": [{
     "type": "docker",
     "image": "ubuntu:xenial",
-    "export_path": "immutable.tar",
+    "export_path": "configs/immutable.tar",
     "changes": [
         "EXPOSE 5000 5000",
         "WORKDIR /root",
