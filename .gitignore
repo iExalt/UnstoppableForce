@@ -11,3 +11,9 @@
 
 ### Ansible ###
 *.retry
+
+### Certificates ###
+*.cnf
+
+### Packing ###
+packing

@@ -37,8 +37,8 @@ resource "digitalocean_droplet" "instance" {
     ]
   }
   provisioner "file" {
-    source = "${path.module}/config/immutable.tar"
-    destination = "/root/immutable.tar"
+    source = "${path.module}/config/image.tar"
+    destination = "/root/image.tar"
   }
   provisioner "file" {
     source = "${path.module}/config/srv.yaml"
@@ -50,7 +50,7 @@ resource "digitalocean_droplet" "instance" {
       "curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 && chmod +x minikube &&  mv minikube /usr/local/bin/",
       "curl -Lo kubectl https://storage.googleapis.com/kubernetes-release/release/v1.9.0/bin/linux/amd64/kubectl && chmod +x kubectl && mv kubectl /usr/local/bin/",
       "minikube start --vm-driver=none --extra-config=apiserver.ServiceNodePortRange=1-15000",
-      "docker import immutable.tar a:a",
+      "docker import image.tar a:a",
       "kubectl run dep1 --image=a:a --port 5000 --command -- python3 /root/website.py --image-pull-policy=Never",
       "kubectl create -f srv.yaml",
       "mkdir -p /etc/pki/tls/certs",

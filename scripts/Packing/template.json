@@ -6,8 +6,8 @@
   },
   "builders": [{
     "type": "docker",
-    "image": "ubuntu:xenial",
-    "export_path": "configs/immutable.tar",
+    "image": "python:3.7-rc-alpine",
+    "export_path": "../Kubernetes/config/image.tar",
     "changes": [
         "EXPOSE 5000 5000",
         "WORKDIR /root",
@@ -18,17 +18,16 @@
         "-i",
         "-t",
         "--name",
-        "container01",
+        "container1",
         "{{.Image}}",
-        "/bin/bash"
+        "/bin/ash"
     ]
   }],
  "provisioners": [
     {
       "type": "shell",
-      "inline": [ "apt-get update && apt-get --yes install python3-pip python3-dev && pip3 install flask",
-                  "apt-get --yes install rsync"
-                ]
+      "inline": [ "pip3 install flask",
+                  "apk add --no-cache --virtual .build-deps rsync" ]
     },
     {
       "type": "ansible",
@@ -36,7 +35,7 @@
       "playbook_file": "./copy_into.yaml",
       "extra_arguments": [
         "--extra-vars",
-        "ansible_host=container01 ansible_connection=docker ansible_python_interpreter=/usr/bin/python3"
+        "ansible_host=container1 ansible_connection=docker ansible_python_interpreter=python3"
       ]
     }
   ],
