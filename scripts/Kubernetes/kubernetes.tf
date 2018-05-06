@@ -51,7 +51,7 @@ resource "digitalocean_droplet" "instance" {
       "curl -Lo kubectl https://storage.googleapis.com/kubernetes-release/release/v1.9.0/bin/linux/amd64/kubectl && chmod +x kubectl && mv kubectl /usr/local/bin/",
       "minikube start --vm-driver=none --extra-config=apiserver.ServiceNodePortRange=1-15000",
       "docker import image.tar a:a",
-      "kubectl run dep1 --image=a:a --port 5000 --command -- python3 /root/website.py --image-pull-policy=Never",
+      "kubectl run dep1 --image=a:a --port 5000 --command -- python3 /path/to/website.py --image-pull-policy=Never",
       "kubectl create -f srv.yaml",
       "mkdir -p /etc/pki/tls/certs",
       "echo 'deb https://packages.elastic.co/beats/apt stable main' | tee -a /etc/apt/sources.list.d/beats.list",

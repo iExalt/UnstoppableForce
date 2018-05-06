@@ -4,7 +4,7 @@
   tasks:
     - name: Add website folder
       synchronize:
-        src: /home/clement/Documents/website/dev_test/
+        src: /path/to/website/folder 
         dest: /root
         recursive: yes
         rsync_opts:
